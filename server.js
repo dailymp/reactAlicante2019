@@ -13,7 +13,7 @@ const checkJwt = jwt({
     jwksRequestsPerMinute: 5, // prevent attackers from requesting more than 5 per minute
     jwksUri: `https://${
       process.env.REACT_APP_AUTH0_DOMAIN
-    }/.well-known/jwks.json`
+    }/.well-known/jwks.json` 
   }),
 
   // Validate the audience and the issuer.
