@@ -1,28 +1,69 @@
-import auth0 from "auth0-js";
+import * as auth0 from "auth0-js";
+import { createHashHistory } from 'history';
+export const history = createHashHistory();
+
+const createAuthOptions = () : auth0.AuthOptions => (
+  {
+    domain: "" ,
+    clientID: "",
+    responseType: "",
+    responseMode: "",
+    redirectUri: "",
+    scope: "",
+    audience: "",
+    leeway: 0,
+    plugins: [],
+    _disableDeprecationWarnings: false,
+    _sendTelemetry: false,
+    _telemetryInfo: null,
+    __tryLocalStorageFirst: false,
+  }
+);
+
+class Auth {
+  private readonly REDIRECT_ON_LOGIN :string = "redirect_on_login";
+  
+  private _idToken = null;
+  private _accessToken = null;
+  private _scopes = null;
+  private _expiresAt = null;
+  private userProfile = null;
+  private requestedScopes:string;
+  private auth0:auth0.WebAuth;
+  private history:object;
+
+  constructor(history:object) {
+    this.history = history;
+    //this.history = history;
+    this.userProfile = null;
+    this.requestedScopes = "openid profile email read:courses";
+    let options: auth0.AuthOptions = createAuthOptions();
+
+    options.domain = process.env.REACT_APP_AUTH0_DOMAIN ? process.env.REACT_APP_AUTH0_DOMAIN : "";
+    options.clientID = process.env.REACT_APP_AUTH0_CLIENT_ID ? process.env.REACT_APP_AUTH0_CLIENT_ID : "";
+    options.redirectUri = process.env.REACT_APP_AUTH0_CALLBACK_URL;
+    options.audience = process.env.REACT_APP_AUTH0_AUDIENCE ? process.env.REACT_APP_AUTH0_AUDIENCE : "";
+    options.responseType ="token id_token";
+    options.scope =this.requestedScopes;
+
+    this.auth0 = new auth0.WebAuth(options);
+  }
+
+  public login = () => {
+    localStorage.setItem(
+      REDIRECT_ON_LOGIN,
+      JSON.stringify(this.history.location)
+    );
+    this.auth0.authorize();
+  }
+
+}
 
 const REDIRECT_ON_LOGIN = "redirect_on_login";
 
-// Stored outside class since private
-// eslint-disable-next-line
-let _idToken = null;
-let _accessToken = null;
-let _scopes = null;
-let _expiresAt = null;
 
-export default class Auth {
-  constructor(history) {
-    this.history = history;
-    this.userProfile = null;
-    this.requestedScopes = "openid profile email read:courses";
-    this.auth0 = new auth0.WebAuth({
-      domain: process.env.REACT_APP_AUTH0_DOMAIN,
-      clientID: process.env.REACT_APP_AUTH0_CLIENT_ID,
-      redirectUri: process.env.REACT_APP_AUTH0_CALLBACK_URL,
-      audience: process.env.REACT_APP_AUTH0_AUDIENCE,
-      responseType: "token id_token",
-      scope: this.requestedScopes
-    });
-  }
+export default class Auth2 {
+
 
   login = () => {
     localStorage.setItem(
