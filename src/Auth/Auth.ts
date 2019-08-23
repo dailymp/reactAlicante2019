@@ -24,15 +24,15 @@ class Auth {
   private readonly REDIRECT_ON_LOGIN :string = "redirect_on_login";
   
   private _idToken = null;
-  private _accessToken = null;
+  private _accessToken:string = "";
   private _scopes = null;
-  private _expiresAt = null;
-  private userProfile = null;
+  private _expiresAt:number = 0;
+  private userProfile:any;
   private requestedScopes:string;
   private auth0:auth0.WebAuth;
-  private history:object;
+  private history:any;
 
-  constructor(history:object) {
+  constructor(history:any) {
     this.history = history;
     //this.history = history;
     this.userProfile = null;
@@ -51,81 +51,66 @@ class Auth {
 
   public login = () => {
     localStorage.setItem(
-      REDIRECT_ON_LOGIN,
+      this.REDIRECT_ON_LOGIN,
       JSON.stringify(this.history.location)
     );
     this.auth0.authorize();
   }
 
-}
-
-const REDIRECT_ON_LOGIN = "redirect_on_login";
-
-
-export default class Auth2 {
-
-
-  login = () => {
-    localStorage.setItem(
-      REDIRECT_ON_LOGIN,
-      JSON.stringify(this.history.location)
-    );
-    this.auth0.authorize();
-  };
-
-  handleAuthentication = () => {
+  private handleAuthentication = () => {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult);
         const redirectLocation =
-          localStorage.getItem(REDIRECT_ON_LOGIN) === "undefined"
+          localStorage.getItem(this.REDIRECT_ON_LOGIN) === "undefined"
             ? "/"
-            : JSON.parse(localStorage.getItem(REDIRECT_ON_LOGIN));
+            : JSON.parse(localStorage.getItem(this.REDIRECT_ON_LOGIN));
+            
         this.history.push(redirectLocation);
       } else if (err) {
         this.history.push("/");
         alert(`Error: ${err.error}. Check the console for further details.`);
         console.log(err);
       }
-      localStorage.removeItem(REDIRECT_ON_LOGIN);
+      localStorage.removeItem(this.REDIRECT_ON_LOGIN);
     });
   };
 
-  setSession = authResult => {
+  private setSession = (authResult:any) => {
     console.log(authResult);
     // set the time that the access token will expire
-    _expiresAt = authResult.expiresIn * 1000 + new Date().getTime();
+    this._expiresAt = authResult.expiresIn * 1000 + new Date().getTime();
 
     // If there is a value on the `scope` param from the authResult,
     // use it to set scopes in the session for the user. Otherwise
     // use the scopes as requested. If no scopes were requested,
     // set it to nothing
-    _scopes = authResult.scope || this.requestedScopes || "";
+    this._scopes = authResult.scope || this.requestedScopes || "";
 
-    _accessToken = authResult.accessToken;
-    _idToken = authResult.idToken;
+    this._accessToken = authResult.accessToken;
+    this._idToken = authResult.idToken;
     this.scheduleTokenRenewal();
   };
 
-  isAuthenticated() {
-    return new Date().getTime() < _expiresAt;
+  private isAuthenticated = () => {
+    return new Date().getTime() < this._expiresAt;
   }
 
-  logout = () => {
+  public logout = () => {
     this.auth0.logout({
       clientID: process.env.REACT_APP_AUTH0_CLIENT_ID,
       returnTo: "http://localhost:3000"
     });
   };
 
-  getAccessToken = () => {
-    if (!_accessToken) {
+  public getAccessToken = () => {
+    if (!this._accessToken) {
       throw new Error("No access token found.");
     }
-    return _accessToken;
+    return this._accessToken;
   };
 
-  getProfile = cb => {
+  public getProfile = (cb) => {
     if (this.userProfile) return cb(this.userProfile);
     this.auth0.client.userInfo(this.getAccessToken(), (err, profile) => {
       if (profile) this.userProfile = profile;
@@ -133,12 +118,19 @@ export default class Auth2 {
     });
   };
 
-  userHasScopes(scopes) {
-    const grantedScopes = (_scopes || "").split(" ");
-    return scopes.every(scope => grantedScopes.includes(scope));
+  
+  public userHasScopes = (scopes:any)=> {
+    const grantedScopes = (this._scopes || "").split(" ");
+    return scopes.every((scope:any) => grantedScopes.includes(scope));
   }
 
-  renewToken(cb) {
+
+  private scheduleTokenRenewal = ()=> {
+    const delay = this._expiresAt - Date.now();
+    if (delay > 0) setTimeout(() => this.renewToken(), delay);
+  }
+
+  private renewToken = (cb:any)=> {
     this.auth0.checkSession({}, (err, result) => {
       if (err) {
         console.log(`Error: ${err.error} - ${err.error_description}.`);
@@ -149,8 +141,6 @@ export default class Auth2 {
     });
   }
 
-  scheduleTokenRenewal() {
-    const delay = _expiresAt - Date.now();
-    if (delay > 0) setTimeout(() => this.renewToken(), delay);
-  }
 }
+
+
