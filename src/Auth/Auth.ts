@@ -20,7 +20,7 @@ const createAuthOptions = () : auth0.AuthOptions => (
   }
 );
 
-class Auth {
+export default class Auth {
   private readonly REDIRECT_ON_LOGIN :string = "redirect_on_login";
   
   private _idToken = null;
@@ -62,9 +62,10 @@ class Auth {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult);
         const redirectLocation =
-          localStorage.getItem(this.REDIRECT_ON_LOGIN) === "undefined"
+          localStorage.getItem(this.REDIRECT_ON_LOGIN) === "undefined" 
             ? "/"
-            : JSON.parse(localStorage.getItem(this.REDIRECT_ON_LOGIN));
+            : JSON.parse(localStorage.getItem(this.REDIRECT_ON_LOGIN)
+          );
             
         this.history.push(redirectLocation);
       } else if (err) {
@@ -127,7 +128,7 @@ class Auth {
 
   private scheduleTokenRenewal = ()=> {
     const delay = this._expiresAt - Date.now();
-    if (delay > 0) setTimeout(() => this.renewToken(), delay);
+    if (delay > 0) setTimeout(() => this.renewToken(undefined), delay);
   }
 
   private renewToken = (cb:any)=> {
