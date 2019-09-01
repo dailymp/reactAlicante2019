@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import * as React from "react";
 import { Route } from "react-router-dom";
 import Home from "./Home";
 import Profile from "./Profile";
@@ -11,8 +11,15 @@ import Courses from "./Courses";
 import PrivateRoute from "./PrivateRoute";
 import AuthContext from "./AuthContext";
 
-class App extends Component {
-  constructor(props) {
+interface Props {
+  history: object;
+}
+interface State {
+auth: Auth;
+tokenRenewalComplete: boolean;
+}
+export class App extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = {
       auth: new Auth(this.props.history),
@@ -37,15 +44,15 @@ class App extends Component {
           <Route
             path="/"
             exact
-            render={props => <Home auth={auth} {...props} />}
+            render={(props: Props) => <Home auth={auth} {...props} />}
           />
           <Route
             path="/callback"
-            render={props => <Callback auth={auth} {...props} />}
+            render={(props: Props) => <Callback auth={auth} {...props} />}
           />
-          <PrivateRoute path="/profile" component={Profile} />
+          <PrivateRoute path="/profile" component={Profile} scopes= {[]} />
           <Route path="/public" component={Public} />
-          <PrivateRoute path="/private" component={Private} />
+          <PrivateRoute path="/private" component={Private} scopes= {[]} />
           <PrivateRoute
             path="/courses"
             component={Courses}
