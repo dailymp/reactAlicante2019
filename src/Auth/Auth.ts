@@ -25,7 +25,7 @@ export default class Auth {
   
   private _idToken = null;
   private _accessToken:string = "";
-  private _scopes = null;
+  private _scopes:string = "";
   private _expiresAt:number = 0;
   private userProfile:any;
   private requestedScopes:string;
@@ -34,7 +34,6 @@ export default class Auth {
 
   constructor(history:any) {
     this.history = history;
-    //this.history = history;
     this.userProfile = null;
     this.requestedScopes = "openid profile email read:courses";
     let options: auth0.AuthOptions = createAuthOptions();
@@ -49,7 +48,7 @@ export default class Auth {
     this.auth0 = new auth0.WebAuth(options);
   }
 
-  public login = () => {
+  public login = ():void => {
     localStorage.setItem(
       this.REDIRECT_ON_LOGIN,
       JSON.stringify(this.history.location)
@@ -57,7 +56,7 @@ export default class Auth {
     this.auth0.authorize();
   }
 
-  private handleAuthentication = () => {
+  private handleAuthentication = ():void => {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult);
@@ -77,8 +76,7 @@ export default class Auth {
     });
   };
 
-  private setSession = (authResult:any) => {
-    console.log(authResult);
+  private setSession = (authResult:any):void => {
     // set the time that the access token will expire
     this._expiresAt = authResult.expiresIn * 1000 + new Date().getTime();
 
@@ -93,11 +91,11 @@ export default class Auth {
     this.scheduleTokenRenewal();
   };
 
-  private isAuthenticated = () => {
+  private isAuthenticated = ():boolean => {
     return new Date().getTime() < this._expiresAt;
   }
 
-  public logout = () => {
+  public logout = ():void => {
     this.auth0.logout({
       clientID: process.env.REACT_APP_AUTH0_CLIENT_ID,
       returnTo: "http://localhost:3000"
@@ -120,18 +118,18 @@ export default class Auth {
   };
 
   
-  public userHasScopes = (scopes:any)=> {
+  public userHasScopes = (scopes:string[]):boolean => {
     const grantedScopes = (this._scopes || "").split(" ");
-    return scopes.every((scope:any) => grantedScopes.includes(scope));
+    return scopes.every((scope:string) => grantedScopes.includes(scope));
   }
 
 
-  private scheduleTokenRenewal = ()=> {
+  private scheduleTokenRenewal = ():void=> {
     const delay = this._expiresAt - Date.now();
     if (delay > 0) setTimeout(() => this.renewToken(undefined), delay);
   }
 
-  private renewToken = (cb:any)=> {
+  private renewToken = (cb:any):void=> {
     this.auth0.checkSession({}, (err, result) => {
       if (err) {
         console.log(`Error: ${err.error} - ${err.error_description}.`);
