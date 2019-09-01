@@ -128,7 +128,8 @@ export default class Auth {
     if (delay > 0) setTimeout(() => this.renewToken(undefined), delay);
   }
 
-  public renewToken = (cb:any):void=> {
+  public renewToken = (cb:(err,result)=>void):void=> {
+    debugger;
     this.auth0.checkSession({}, (err, result) => {
       if (err) {
         console.log(`Error: ${err.error} - ${err.error_description}.`);

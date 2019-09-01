@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Route } from "react-router-dom";
+import { History } from "history";
 import Home from "./Home";
 import Profile from "./Profile";
 import Nav from "./Nav";
@@ -48,7 +49,7 @@ export class App extends React.Component<Props, State> {
           />
           <Route
             path="/callback"
-            render={(props: Props) => <Callback auth={auth} location={null} {...props} />}
+            render={(props: Props) => <Callback auth={auth} location={this.props.history.location} {...props} />}
           />
           <PrivateRoute path="/profile" component={Profile} scopes={[]} />
           <Route path="/public" component={Public} />

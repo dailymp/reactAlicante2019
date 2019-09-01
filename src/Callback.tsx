@@ -1,6 +1,6 @@
 import * as React from "react";
 import Auth from "./Auth/Auth";
-import { Location } from "history";
+import { Location, History } from "history";
 
 
 interface Props {
