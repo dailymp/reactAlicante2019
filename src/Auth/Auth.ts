@@ -1,6 +1,5 @@
 import * as auth0 from "auth0-js";
-import { createHashHistory } from 'history';
-export const history = createHashHistory();
+import { History } from "history";
 
 const createAuthOptions = () : auth0.AuthOptions => (
   {
@@ -30,7 +29,7 @@ export default class Auth {
   private userProfile:any;
   private requestedScopes:string;
   private auth0:auth0.WebAuth;
-  private history:any;
+  private history:History;
 
   constructor(history:any) {
     this.history = history;
@@ -56,7 +55,7 @@ export default class Auth {
     this.auth0.authorize();
   }
 
-  private handleAuthentication = ():void => {
+  public handleAuthentication = ():void => {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult);
@@ -129,7 +128,8 @@ export default class Auth {
     if (delay > 0) setTimeout(() => this.renewToken(undefined), delay);
   }
 
-  private renewToken = (cb:any):void=> {
+  public renewToken = (cb:(err,result)=>void):void=> {
+    debugger;
     this.auth0.checkSession({}, (err, result) => {
       if (err) {
         console.log(`Error: ${err.error} - ${err.error_description}.`);
