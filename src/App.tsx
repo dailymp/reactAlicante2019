@@ -12,11 +12,11 @@ import PrivateRoute from "./PrivateRoute";
 import AuthContext from "./AuthContext";
 
 interface Props {
-  history: object;
+  history: History;
 }
 interface State {
-auth: Auth;
-tokenRenewalComplete: boolean;
+  auth: Auth;
+  tokenRenewalComplete: boolean;
 }
 export class App extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -48,11 +48,11 @@ export class App extends React.Component<Props, State> {
           />
           <Route
             path="/callback"
-            render={(props: Props) => <Callback auth={auth} {...props} />}
+            render={(props: Props) => <Callback auth={auth} location={null} {...props} />}
           />
-          <PrivateRoute path="/profile" component={Profile} scopes= {[]} />
+          <PrivateRoute path="/profile" component={Profile} scopes={[]} />
           <Route path="/public" component={Public} />
-          <PrivateRoute path="/private" component={Private} scopes= {[]} />
+          <PrivateRoute path="/private" component={Private} scopes={[]} />
           <PrivateRoute
             path="/courses"
             component={Courses}

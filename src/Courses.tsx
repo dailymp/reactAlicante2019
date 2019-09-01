@@ -1,9 +1,29 @@
-import React, { Component } from "react";
+import * as React from "react";
+import Auth from "./Auth/Auth";
+import { Location } from "history";
+import { CoursesModel } from "./models/Courses";
 
-class Courses extends Component {
-  state = {
-    courses: []
-  };
+interface Props {
+  history: History;
+  location: Location;
+  auth: Auth;
+}
+interface State {
+  courses: CoursesModel[];
+  message:string;
+}
+
+class Courses extends React.Component<Props, State> {
+ 
+   constructor(props: Props) {
+    super(props);
+    this.state = {
+      courses: [],
+      message:""
+    }
+  }
+  
+ 
 
   componentDidMount() {
     fetch("/course", {
