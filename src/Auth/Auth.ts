@@ -91,7 +91,7 @@ export default class Auth {
     this.scheduleTokenRenewal();
   };
 
-  private isAuthenticated = ():boolean => {
+  public isAuthenticated = ():boolean => {
     return new Date().getTime() < this._expiresAt;
   }
 
@@ -129,7 +129,7 @@ export default class Auth {
     if (delay > 0) setTimeout(() => this.renewToken(undefined), delay);
   }
 
-  private renewToken = (cb:any):void=> {
+  public renewToken = (cb:any):void=> {
     this.auth0.checkSession({}, (err, result) => {
       if (err) {
         console.log(`Error: ${err.error} - ${err.error_description}.`);
