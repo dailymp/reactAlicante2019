@@ -1,15 +1,24 @@
-import React, { Component } from "react";
+import * as React from "react";
+import Auth from "./Auth/Auth";
 
-class Private extends Component {
+interface Props {
+  auth: Auth;
+  history: History;
+}
+interface State {
+  // tokenRenewalComplete: boolean;
+  message:string;
+}
+
+class Private extends React.Component<Props, State> {
   state = {
     message: ""
   };
-
   componentDidMount() {
     fetch("/private", {
       headers: { Authorization: `Bearer ${this.props.auth.getAccessToken()}` }
     })
-      .then(response => {
+      .then( (response:Response) => {
         if (response.ok) return response.json();
         throw new Error("Network response was not ok.");
       })
