@@ -90,7 +90,7 @@ export default class Auth {
     this.scheduleTokenRenewal();
   };
 
-  private isAuthenticated = ():boolean => {
+  public isAuthenticated = ():boolean => {
     return new Date().getTime() < this._expiresAt;
   }
 
