@@ -129,7 +129,6 @@ export default class Auth {
   }
 
   public renewToken = (cb:(err,result)=>void):void=> {
-    debugger;
     this.auth0.checkSession({}, (err, result) => {
       if (err) {
         console.log(`Error: ${err.error} - ${err.error_description}.`);
