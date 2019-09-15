@@ -2,6 +2,7 @@ import * as React from "react";
 
 import { Route } from "react-router-dom";
 import AuthContext from "./AuthContext";
+import Auth from "./Auth/Auth";
 
 interface Props {
   path: string;
@@ -16,12 +17,12 @@ export default class PrivateRoute extends React.Component<Props, {}> {
     const { component: Component, scopes, ...rest } = this.props;
     return (
       <AuthContext.Consumer>
-        {auth => (
+        {(auth: Auth) => (
           <Route
             {...rest}
             render={props => {
               // 1. Redirect to login if not logged in.
-              if (!auth.isAuthenticated()) return auth.login();
+              if (!auth.isAuthenticated()) return auth.login() as any;
 
               // 2. Display message if user lacks required scope(s).
               if (scopes.length > 0 && !auth.userHasScopes(scopes)) {
