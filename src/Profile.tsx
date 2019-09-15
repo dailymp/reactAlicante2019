@@ -1,6 +1,15 @@
-import React, { Component } from "react";
+import * as React from "react";
+import Auth from "./Auth/Auth";
 
-class Profile extends Component {
+interface Props {
+  auth: Auth;
+}
+interface State {
+  profile:any;
+  error:string;
+}
+
+class Profile  extends React.Component<Props, State>  {
   state = {
     profile: null,
     error: ""
