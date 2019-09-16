@@ -6,7 +6,6 @@ interface Props {
   auth: Auth;
 }
 
-
 class Nav extends React.Component<Props, {}> {
   render() {
     const { isAuthenticated, login, logout, userHasScopes } = this.props.auth;

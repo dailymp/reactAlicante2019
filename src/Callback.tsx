@@ -9,7 +9,6 @@ interface Props {
   auth: Auth;
 }
 
-
 class Callback extends React.Component<Props, {}> {
   componentDidMount = () => {
     // Handle authentication if expected values are in the URL.

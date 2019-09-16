@@ -10,20 +10,18 @@ interface Props {
 }
 interface State {
   courses: CoursesModel[];
-  message:string;
+  message: string;
 }
 
 class Courses extends React.Component<Props, State> {
- 
-   constructor(props: Props) {
+
+  constructor(props: Props) {
     super(props);
     this.state = {
       courses: [],
-      message:""
+      message: ""
     }
   }
-  
- 
 
   componentDidMount() {
     fetch("/course", {

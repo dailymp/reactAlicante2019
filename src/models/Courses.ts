@@ -1,4 +1,4 @@
 export interface CoursesModel {
-    id:number;
-    title:string;
+    id: number;
+    title: string;
 }
