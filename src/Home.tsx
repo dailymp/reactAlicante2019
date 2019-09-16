@@ -1,7 +1,8 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 import Auth from "./Auth/Auth";
-
+import RecipeReviewCard from './Card'
+import { Button } from "@material-ui/core";
 interface Props {
   auth: Auth;
 }
@@ -10,11 +11,11 @@ class Home extends React.Component<Props> {
     const { isAuthenticated, login } = this.props.auth;
     return (
       <div>
-        <h1>Home</h1>
+        <RecipeReviewCard />
         {isAuthenticated() ? (
-          <Link to="/profile">View profile</Link>
+          <Link to="/profile">View entire profile</Link>
         ) : (
-            <button onClick={login}>Log In</button>
+            <Button onClick={login}>Log In to view profile</Button>
           )}
       </div>
     );

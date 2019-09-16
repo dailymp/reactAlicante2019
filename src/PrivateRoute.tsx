@@ -16,16 +16,17 @@ export default class PrivateRoute extends React.Component<Props, {}> {
     return (
       <AuthContext.Consumer>
         {(auth: Auth) => (
-        <Route
-          {...rest}
-          render={props => {
-            // 1. Redirect to login if not logged in.
-            if (!auth.isAuthenticated()) return auth.login() as any;
-            // 2. Display message if user lacks required scope(s).
-            if (scopes.length > 0 && !auth.userHasScopes(scopes)) {
-              return (
-                <h1>
-                  Unauthorized - You need the following scope(s) to view this
+          <Route
+            {...rest}
+            render={props => {
+              // 1. Redirect to login if not logged in.
+              if (!auth.isAuthenticated()) return auth.login() as any;
+
+              // 2. Display message if user lacks required scope(s).
+              if (scopes.length > 0 && !auth.userHasScopes(scopes)) {
+                return (
+                  <h1>
+                    Unauthorized - You need the following scope(s) to view this
                     page: {scopes.join(",")}.
                   </h1>
               );

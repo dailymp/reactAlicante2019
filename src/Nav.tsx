@@ -1,46 +1,53 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as React from "react";
-import { Link } from "react-router-dom";
 import Auth from "./Auth/Auth";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import TemporaryDrawer from './Menu';
 
 interface Props {
   auth: Auth;
 }
 
-class Nav extends React.Component<Props, {}> {
-  render() {
-    const { isAuthenticated, login, logout, userHasScopes } = this.props.auth;
-    return (
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/profile">Profile</Link>
-          </li>
-          <li>
-            <Link to="/public">Public</Link>
-          </li>
-          {isAuthenticated() && (
-            <li>
-              <Link to="/private">Private</Link>
-            </li>
-          )}
-          {isAuthenticated() &&
-            userHasScopes(["read:courses"]) && (
-              <li>
-                <Link to="/courses">Courses</Link>
-              </li>
-            )}
-          <li>
-            <button onClick={isAuthenticated() ? logout : login}>
-              {isAuthenticated() ? "Log Out" : "Log In"}
-            </button>
-          </li>
-        </ul>
-      </nav>
-    );
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1
+  },
+  menuButton: {
+    marginRight: theme.spacing(2)
+  },
+  title: {
+    flexGrow: 1
   }
-}
+}));
+
+export const Nav = (props: Props) => {
+  const { isAuthenticated, login, logout, userHasScopes } = props.auth;
+  const classes = useStyles();
+  return (
+    <>
+      <div className={classes.root}>
+        <AppBar position="static">
+          <Toolbar>
+            <TemporaryDrawer auth={props.auth} />
+            <Typography variant="h6" className={classes.title}>
+              MY GYM APP
+            </Typography>
+            <Button
+              onClick={isAuthenticated() ? logout : login}
+              color="inherit"
+            >
+              {isAuthenticated() ? "Log Out" : "Log In"}
+            </Button>
+          </Toolbar>
+
+        </AppBar>
+      </div>
+    </>
+  );
+};
 
 export default Nav;
