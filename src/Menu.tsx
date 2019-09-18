@@ -15,6 +15,12 @@ import PublicIcon from '@material-ui/icons/Public';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import { Link } from 'react-router-dom';
 import Auth from './Auth/Auth';
+import Typography from "@material-ui/core/Typography";
+import { NONAME } from 'dns';
+
+interface Props {
+  auth: Auth;
+}
 
 const useStyles = makeStyles(theme => ({
   list: {
@@ -24,13 +30,30 @@ const useStyles = makeStyles(theme => ({
     width: 'auto',
   },
   menuButton: {
-    marginRight: theme.spacing(2)
+    marginRight: theme.spacing(2),
   },
+  linkStyle: {
+    textDecoration: 'none',
+    color: '#3f51b5',
+    "&:hover": {
+      color: '#757de8',
+    }
+  },
+  iconStyle: {
+    color: '#3f51b5',
+    '&:hover': {
+      color: '#757de8',
+    }
+  },
+  // hover: {
+  //   "&:hover": {
+  //     backgroundColor: '#3f51b5',
+  //     linkStyle: {
+  //       color: '#757de8',
+  //     },
+  //   },
+  // }
 }));
-
-interface Props {
-  auth: Auth;
-}
 
 const TemporaryDrawer = (props: Props) => {
   const { isAuthenticated, userHasScopes, ...rest } = props.auth;
@@ -67,11 +90,14 @@ const TemporaryDrawer = (props: Props) => {
 
       <Divider />
       <List>
-        <ListItem button>
+        <ListItem button >
           <ListItemIcon>
-            <HomeIcon />
+            <HomeIcon className={classes.iconStyle} />
           </ListItemIcon>
-          <Link to="/">Home</Link>
+          <Link to="/" className={classes.linkStyle}>
+            <Typography variant="h6">
+              Home
+            </Typography></Link>
         </ListItem>
       </List>
 
@@ -79,9 +105,12 @@ const TemporaryDrawer = (props: Props) => {
       <List>
         <ListItem button>
           <ListItemIcon>
-            <AccountBoxIcon />
+            <AccountBoxIcon className={classes.iconStyle} />
           </ListItemIcon>
-          <Link to="/profile">Profile</Link>
+          <Link to="/profile" className={classes.linkStyle}>
+            <Typography variant="h6">
+              Profile
+            </Typography></Link>
         </ListItem>
       </List>
 
@@ -89,9 +118,12 @@ const TemporaryDrawer = (props: Props) => {
       <List>
         <ListItem button>
           <ListItemIcon>
-            <PublicIcon />
+            <PublicIcon className={classes.iconStyle} />
           </ListItemIcon>
-          <Link to="/public">Public</Link>
+          <Link to="/public" className={classes.linkStyle}>
+            <Typography variant="h6">
+              Public
+            </Typography></Link>
         </ListItem>
       </List>
 
