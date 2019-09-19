@@ -16,7 +16,6 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import { Link } from 'react-router-dom';
 import Auth from './Auth/Auth';
 import Typography from "@material-ui/core/Typography";
-import { NONAME } from 'dns';
 
 interface Props {
   auth: Auth;
@@ -32,27 +31,25 @@ const useStyles = makeStyles(theme => ({
   menuButton: {
     marginRight: theme.spacing(2),
   },
-  linkStyle: {
+  linkColor: {
     textDecoration: 'none',
-    color: '#3f51b5',
-    "&:hover": {
-      color: '#757de8',
-    }
+    color: 'white',
   },
-  iconStyle: {
-    color: '#3f51b5',
+  iconColor: {
+    color: 'white',
+  },
+  ContainerButton: {
+    backgroundColor: '#3f51b5',
     '&:hover': {
-      color: '#757de8',
+      backgroundColor: '#002984',
     }
   },
-  // hover: {
-  //   "&:hover": {
-  //     backgroundColor: '#3f51b5',
-  //     linkStyle: {
-  //       color: '#757de8',
-  //     },
-  //   },
-  // }
+  ItemButton: {
+    '&:hover': {
+      background: 'none',
+    }
+
+  },
 }));
 
 const TemporaryDrawer = (props: Props) => {
@@ -89,12 +86,12 @@ const TemporaryDrawer = (props: Props) => {
     >
 
       <Divider />
-      <List>
-        <ListItem button >
+      <List className={classes.ContainerButton}>
+        <ListItem button className={classes.ItemButton}>
           <ListItemIcon>
-            <HomeIcon className={classes.iconStyle} />
+            <HomeIcon className={classes.iconColor} />
           </ListItemIcon>
-          <Link to="/" className={classes.linkStyle}>
+          <Link to="/" className={classes.linkColor}>
             <Typography variant="h6">
               Home
             </Typography></Link>
@@ -102,12 +99,12 @@ const TemporaryDrawer = (props: Props) => {
       </List>
 
       <Divider />
-      <List>
-        <ListItem button>
+      <List className={classes.ContainerButton}>
+        <ListItem button className={classes.ItemButton}>
           <ListItemIcon>
-            <AccountBoxIcon className={classes.iconStyle} />
+            <AccountBoxIcon className={classes.iconColor} />
           </ListItemIcon>
-          <Link to="/profile" className={classes.linkStyle}>
+          <Link to="/profile" className={classes.linkColor}>
             <Typography variant="h6">
               Profile
             </Typography></Link>
@@ -115,12 +112,12 @@ const TemporaryDrawer = (props: Props) => {
       </List>
 
       <Divider />
-      <List>
-        <ListItem button>
+      <List className={classes.ContainerButton}>
+        <ListItem button className={classes.ItemButton}>
           <ListItemIcon>
-            <PublicIcon className={classes.iconStyle} />
+            <PublicIcon className={classes.iconColor} />
           </ListItemIcon>
-          <Link to="/public" className={classes.linkStyle}>
+          <Link to="/public" className={classes.linkColor}>
             <Typography variant="h6">
               Public
             </Typography></Link>
@@ -130,12 +127,16 @@ const TemporaryDrawer = (props: Props) => {
       {isAuthenticated() && (
         <>
           <Divider />
-          <List>
-            <ListItem button>
+          <List className={classes.ContainerButton}>
+            <ListItem button className={classes.ItemButton}>
               <ListItemIcon>
-                <VisibilityIcon />
+                <VisibilityIcon className={classes.iconColor} />
               </ListItemIcon>
-              <Link to="/private">Private</Link>
+              <Link to="/private" className={classes.linkColor}>
+                <Typography variant="h6">
+                  Private
+            </Typography>
+              </Link>
             </ListItem>
           </List>
         </>
@@ -144,12 +145,16 @@ const TemporaryDrawer = (props: Props) => {
       {isAuthenticated() && userHasScopes(["read:courses"]) && (
         <>
           <Divider />
-          <List>
-            <ListItem button>
+          <List className={classes.ContainerButton}>
+            <ListItem button className={classes.ItemButton}>
               <ListItemIcon>
-                <SchoolIcon />
+                <SchoolIcon className={classes.iconColor} />
               </ListItemIcon>
-              <Link to="/courses">Courses</Link>
+              <Link to="/courses" className={classes.linkColor}>
+                <Typography variant="h6">
+                  Courses
+            </Typography>
+              </Link>
             </ListItem>
           </List>
         </>
