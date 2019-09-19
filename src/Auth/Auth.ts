@@ -102,12 +102,14 @@ export default class Auth {
 
   public getAccessToken = () => {
     if (!this._accessToken) {
+      this.login();
       throw new Error("No access token found.");
     }
     return this._accessToken;
   };
 
   public getProfile = (cb) => {
+    if (!this._accessToken) return cb(null, true)
     if (this.userProfile) return cb(this.userProfile);
     this.auth0.client.userInfo(this.getAccessToken(), (err, profile) => {
       if (profile) this.userProfile = profile;

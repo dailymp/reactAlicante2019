@@ -41,7 +41,11 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function RecipeReviewCard() {
+interface Props {
+  profile: any;
+}
+
+export default function ProfileReviewCard(props: Props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -54,7 +58,7 @@ export default function RecipeReviewCard() {
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>
-            R
+            Prof
           </Avatar>
         }
         action={
@@ -62,18 +66,18 @@ export default function RecipeReviewCard() {
             <MoreVertIcon />
           </IconButton>
         }
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
+        title="Preview Profile"
+        subheader={new Date().toDateString()}
       />
       <CardMedia
         className={classes.media}
-        image="/static/images/cards/paella.jpg"
+        image={props.profile && props.profile.picture}
         title="Paella dish"
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          This impressive paella is a perfect party dish and a fun meal to cook together with your
-          guests. Add 1 cup of frozen peas along with the mussels, if you like.
+          {console.log(props.profile)}
+         {props.profile && props.profile.name}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>

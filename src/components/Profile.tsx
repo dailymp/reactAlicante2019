@@ -1,5 +1,5 @@
 import * as React from "react";
-import Auth from "./Auth/Auth";
+import Auth from "../Auth/Auth";
 
 interface Props {
   auth: Auth;

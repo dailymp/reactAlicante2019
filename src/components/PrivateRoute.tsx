@@ -1,8 +1,8 @@
 import * as React from "react";
 
 import { Route } from "react-router-dom";
-import AuthContext from "./AuthContext";
-import Auth from "./Auth/Auth";
+import AuthContext from "./../AuthContext";
+import Auth from "./../Auth/Auth";
 
 interface Props {
   path: string;
