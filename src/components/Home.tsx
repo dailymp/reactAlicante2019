@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-import Auth from "./Auth/Auth";
+import Auth from "../Auth/Auth";
 import RecipeReviewCard from './Card'
 import { Button } from "@material-ui/core";
 interface Props {

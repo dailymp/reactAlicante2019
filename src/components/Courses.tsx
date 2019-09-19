@@ -1,7 +1,7 @@
 import * as React from "react";
-import Auth from "./Auth/Auth";
+import Auth from "../Auth/Auth";
 import { Location } from "history";
-import { CoursesModel } from "./models/Courses";
+import { CoursesModel } from "../models/Courses";
 
 interface Props {
   history: History;

@@ -14,7 +14,7 @@ import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import PublicIcon from '@material-ui/icons/Public';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import { Link } from 'react-router-dom';
-import Auth from './Auth/Auth';
+import Auth from '../Auth/Auth';
 
 const useStyles = makeStyles(theme => ({
   list: {
