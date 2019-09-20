@@ -75,7 +75,7 @@ export default class Auth {
     });
   };
 
-  private setSession = (authResult: any): void => {
+  private setSession = (authResult): void => {
     // set the time that the access token will expire
     this._expiresAt = authResult.expiresIn * 1000 + new Date().getTime();
     // If there is a value on the `scope` param from the authResult,
@@ -117,12 +117,10 @@ export default class Auth {
     });
   };
 
-
   public userHasScopes = (scopes: string[]): boolean => {
     const grantedScopes = (this._scopes || "").split(" ");
     return scopes.every((scope: string) => grantedScopes.includes(scope));
   }
-
 
   private scheduleTokenRenewal = (): void => {
     const delay = this._expiresAt - Date.now();
