@@ -2,20 +2,35 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import Auth from "./Auth/Auth";
 import RecipeReviewCard from './Card'
-import { Button } from "@material-ui/core";
+import { Button, Typography, ListItem, List } from "@material-ui/core";
+
 interface Props {
   auth: Auth;
 }
+
 class Home extends React.Component<Props> {
+
   render() {
     const { isAuthenticated, login } = this.props.auth;
     return (
       <div>
         <RecipeReviewCard />
         {isAuthenticated() ? (
-          <Link to="/profile">View entire profile</Link>
+          <List>
+            <ListItem>
+              <Link to="/profile">
+                <Typography variant="h6">
+                  View entire profile
+              </Typography>
+              </Link>
+            </ListItem>
+          </List>
         ) : (
-            <Button onClick={login}>Log In to view profile</Button>
+            <List>
+              <ListItem>
+                <Button onClick={login}>Log In to view profile</Button>
+              </ListItem>
+            </List>
           )}
       </div>
     );

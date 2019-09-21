@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { List, ListItem, ListItemText } from '@material-ui/core';
 
 interface State {
 	message: string;
@@ -20,7 +21,13 @@ class Public extends React.Component<{}, State> {
 	}
 
 	render() {
-		return <p>{this.state.message}</p>;
+		return (
+			<List>
+				<ListItem>
+					<ListItemText primary={this.state.message} />
+				</ListItem>
+			</List>
+		)
 	}
 }
 

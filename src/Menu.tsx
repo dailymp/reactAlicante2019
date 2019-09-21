@@ -33,6 +33,7 @@ const useStyles = makeStyles(theme => ({
   },
   linkColor: {
     textDecoration: 'none',
+    backgroundColor: 'none',
     color: 'white',
   },
   iconColor: {
@@ -42,19 +43,18 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: '#3f51b5',
     '&:hover': {
       backgroundColor: '#002984',
-    }
+    },
   },
   ItemButton: {
     '&:hover': {
       background: 'none',
     }
-
   },
 }));
 
 const TemporaryDrawer = (props: Props) => {
   const { isAuthenticated, userHasScopes, ...rest } = props.auth;
-  const classes = useStyles();
+  const classes = useStyles(props);
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -92,9 +92,10 @@ const TemporaryDrawer = (props: Props) => {
             <HomeIcon className={classes.iconColor} />
           </ListItemIcon>
           <Link to="/" className={classes.linkColor}>
-            <Typography variant="h6">
+            <Typography variant="h6" >
               Home
-            </Typography></Link>
+            </Typography>
+          </Link>
         </ListItem>
       </List>
 
@@ -107,7 +108,8 @@ const TemporaryDrawer = (props: Props) => {
           <Link to="/profile" className={classes.linkColor}>
             <Typography variant="h6">
               Profile
-            </Typography></Link>
+            </Typography>
+          </Link>
         </ListItem>
       </List>
 
@@ -120,7 +122,8 @@ const TemporaryDrawer = (props: Props) => {
           <Link to="/public" className={classes.linkColor}>
             <Typography variant="h6">
               Public
-            </Typography></Link>
+            </Typography>
+          </Link>
         </ListItem>
       </List>
 
@@ -135,7 +138,7 @@ const TemporaryDrawer = (props: Props) => {
               <Link to="/private" className={classes.linkColor}>
                 <Typography variant="h6">
                   Private
-            </Typography>
+                </Typography>
               </Link>
             </ListItem>
           </List>
@@ -153,7 +156,7 @@ const TemporaryDrawer = (props: Props) => {
               <Link to="/courses" className={classes.linkColor}>
                 <Typography variant="h6">
                   Courses
-            </Typography>
+                </Typography>
               </Link>
             </ListItem>
           </List>
