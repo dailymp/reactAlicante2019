@@ -2,7 +2,8 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import Auth from "./Auth/Auth";
 import RecipeReviewCard from './Card'
-import { Button, Typography, ListItem, List } from "@material-ui/core";
+import { Button, Typography, ListItem, List, Container } from "@material-ui/core";
+import './css/Home.css';
 
 interface Props {
   auth: Auth;
@@ -13,13 +14,13 @@ class Home extends React.Component<Props> {
   render() {
     const { isAuthenticated, login } = this.props.auth;
     return (
-      <div>
+      <Container maxWidth="sm" className="ContainerCardHome">
         <RecipeReviewCard />
         {isAuthenticated() ? (
-          <List>
-            <ListItem>
-              <Link to="/profile">
-                <Typography variant="h6">
+          <List >
+            <ListItem button className="ContainerButtonHome">
+              <Link className="LinkHome" to="/profile">
+                <Typography className="TypographtHome" variant="h6">
                   View entire profile
               </Typography>
               </Link>
@@ -27,12 +28,12 @@ class Home extends React.Component<Props> {
           </List>
         ) : (
             <List>
-              <ListItem>
-                <Button onClick={login}>Log In to view profile</Button>
+              <ListItem button className="ContainerButtonHome">
+                <Button className="ButtonHome" onClick={login}>Log In to view profile</Button>
               </ListItem>
             </List>
           )}
-      </div>
+      </Container>
     );
   }
 }

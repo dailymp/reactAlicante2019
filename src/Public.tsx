@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { List, ListItem, ListItemText } from '@material-ui/core';
+import './css/Public.css';
 
 interface State {
 	message: string;
@@ -24,7 +25,7 @@ class Public extends React.Component<{}, State> {
 		return (
 			<List>
 				<ListItem>
-					<ListItemText primary={this.state.message} />
+					<ListItemText className="ListItemTextPublic" primary={this.state.message} />
 				</ListItem>
 			</List>
 		)

@@ -1,6 +1,7 @@
 import * as React from "react";
 import Auth from "./Auth/Auth";
 import { List, ListItem, ListItemText } from "@material-ui/core";
+import './css/Private.css';
 
 interface Props {
   auth: Auth;
@@ -26,11 +27,10 @@ class Private extends React.Component<Props, State> {
   }
 
   render() {
-
     return (
 			<List>
 				<ListItem>
-					<ListItemText primary={this.state.message} />
+					<ListItemText className="ListItemTextPrivate" primary={this.state.message} />
 				</ListItem>
 			</List>
 		) 

@@ -2,6 +2,13 @@ import * as React from "react";
 import Auth from "./Auth/Auth";
 import { Location } from "history";
 import { CoursesModel } from "./models/Courses";
+import GridList from "@material-ui/core/GridList";
+import GridListTile from "@material-ui/core/GridListTile";
+import ListSubheader from "@material-ui/core/ListSubheader";
+import GridListTileBar from "@material-ui/core/GridListTileBar";
+import Typography from "@material-ui/core/Typography";
+import Container from "@material-ui/core/Container";
+import './css/Courses.css';
 
 interface Props {
   history: History;
@@ -21,6 +28,7 @@ class Courses extends React.Component<Props, State> {
       courses: [],
       message: ""
     }
+
   }
 
   componentDidMount() {
@@ -46,12 +54,28 @@ class Courses extends React.Component<Props, State> {
   }
 
   render() {
+
     return (
-      <ul>
-        {this.state.courses.map(course => {
-          return <li key={course.id}>{course.title}</li>;
-        })}
-      </ul>
+        <Container className="ContainerCourses">
+          < GridList cols={1} className="GridListCourses">
+            <GridListTile key="Subheader" cols={1} style={{ height: 'auto' }}>
+              <ListSubheader component="div">
+                <Typography variant="h5">
+                  Cursos
+                </Typography>
+              </ListSubheader>
+            </GridListTile>
+            {
+              this.state.courses.map(course => (
+                <GridListTile key={course.id} cols={1} style={{ height: 'auto', width: 'auto' }}>
+                  <img src="/img/cursos.jpg" alt="course" max-width="200px" />
+                  <GridListTileBar
+                    title={course.title}
+                    titlePosition="bottom" />
+                </GridListTile>
+              ))}
+          </GridList >
+        </Container >
     );
   }
 }

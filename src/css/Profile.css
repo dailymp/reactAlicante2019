@@ -1,0 +1,16 @@
+.ContainerCardProfile {
+    text-align: -webkit-center;
+}
+
+.CardProfile {
+    width: 19rem !important;
+}
+
+.ButtonProfile {
+    background-color: #3f51b5 !important;
+    color: white !important;
+}
+
+.ButtonProfile:hover {
+    background-color: #002984 !important;
+}

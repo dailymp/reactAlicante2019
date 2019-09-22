@@ -16,6 +16,8 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
+interface Props {}
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     card: {
@@ -41,8 +43,8 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function RecipeReviewCard() {
-  const classes = useStyles();
+const RecipeReviewCard = (props: Props) => {
+  const classes = useStyles(props);
   const [expanded, setExpanded] = React.useState(false);
 
   function handleExpandClick() {
@@ -67,7 +69,7 @@ export default function RecipeReviewCard() {
       />
       <CardMedia
         className={classes.media}
-        image="/static/images/cards/paella.jpg"
+        image="/img/paella.jpg"
         title="Paella dish"
       />
       <CardContent>
@@ -124,3 +126,5 @@ export default function RecipeReviewCard() {
     </Card>
   );
 }
+
+export default RecipeReviewCard;

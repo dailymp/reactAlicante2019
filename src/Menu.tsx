@@ -16,6 +16,8 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import { Link } from 'react-router-dom';
 import Auth from './Auth/Auth';
 import Typography from "@material-ui/core/Typography";
+import './css/Menu.css';
+import { Fragment } from 'react';
 
 interface Props {
   auth: Auth;
@@ -24,9 +26,6 @@ interface Props {
 const useStyles = makeStyles(theme => ({
   list: {
     width: 250,
-  },
-  fullList: {
-    width: 'auto',
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -128,7 +127,7 @@ const TemporaryDrawer = (props: Props) => {
       </List>
 
       {isAuthenticated() && (
-        <>
+        <Fragment>
           <Divider />
           <List className={classes.ContainerButton}>
             <ListItem button className={classes.ItemButton}>
@@ -142,11 +141,11 @@ const TemporaryDrawer = (props: Props) => {
               </Link>
             </ListItem>
           </List>
-        </>
+        </Fragment>
       )}
 
       {isAuthenticated() && userHasScopes(["read:courses"]) && (
-        <>
+         <Fragment>
           <Divider />
           <List className={classes.ContainerButton}>
             <ListItem button className={classes.ItemButton}>
@@ -160,7 +159,7 @@ const TemporaryDrawer = (props: Props) => {
               </Link>
             </ListItem>
           </List>
-        </>
+        </Fragment>
       )}
     </div>
   );
@@ -176,7 +175,7 @@ const TemporaryDrawer = (props: Props) => {
       >
         <MenuIcon />
       </IconButton>
-      <Drawer open={state.left} onClose={toggleDrawer('left', false)}>
+      <Drawer className="DrawerHome" open={state.left} onClose={toggleDrawer('left', false)}>
         {sideList('left')}
       </Drawer>
     </div>

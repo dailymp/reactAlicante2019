@@ -1,0 +1,7 @@
+.ListItemTextPrivate {
+    text-align: center !important;
+}
+
+.ListItemTextPrivate span {
+    font-size: 1.5rem !important;
+}
