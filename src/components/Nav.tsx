@@ -32,7 +32,7 @@ export const Nav = (props: Props) => {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            <TemporaryDrawer auth={props.auth} />
+            <TemporaryDrawer auth={props.auth}/>
             <Typography variant="h6" className={classes.title}>
               MY GYM APP
             </Typography>

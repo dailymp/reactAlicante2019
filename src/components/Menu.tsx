@@ -14,17 +14,40 @@ import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import PublicIcon from '@material-ui/icons/Public';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import { Link } from 'react-router-dom';
-import Auth from '../Auth/Auth';
+import Auth from './../Auth/Auth';
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles(theme => ({
   list: {
     width: 250,
   },
+  paper: {
+    background: "rgb(63, 81, 181)"
+  },
   fullList: {
     width: 'auto',
   },
   menuButton: {
-    marginRight: theme.spacing(2)
+    marginRight: theme.spacing(2),
+  },
+  linkColor: {
+    textDecoration: 'none',
+    color: 'white',
+  },
+  iconColor: {
+    color: 'white',
+  },
+  ContainerButton: {
+    backgroundColor: '#3f51b5',
+    '&:hover': {
+      backgroundColor: '#002984',
+    }
+  },
+  ItemButton: {
+    '&:hover': {
+      background: 'none',
+    }
+
   },
 }));
 
@@ -63,47 +86,47 @@ const TemporaryDrawer = (props: Props) => {
       role="presentation"
       onClick={toggleDrawer(side, false)}
       onKeyDown={toggleDrawer(side, false)}
+      id="paco"
     >
 
       <Divider />
-      <List>
-        <ListItem button>
+      <List className={classes.ContainerButton}>
+        <ListItem button className={classes.ItemButton}>
           <ListItemIcon>
-            <HomeIcon />
+            <HomeIcon className={classes.iconColor} />
           </ListItemIcon>
-          <Link to="/">Home</Link>
+          <Link to="/" className={classes.linkColor}>Home</Link>
         </ListItem>
       </List>
 
       <Divider />
-      <List>
-        <ListItem button>
+      <List className={classes.ContainerButton}>
+        <ListItem button className={classes.ItemButton}>
           <ListItemIcon>
-            <AccountBoxIcon />
+            <AccountBoxIcon className={classes.iconColor} />
           </ListItemIcon>
-          <Link to="/profile">Profile</Link>
+          <Link to="/profile" className={classes.linkColor}>Profile</Link>
         </ListItem>
       </List>
 
       <Divider />
-      <List>
-        <ListItem button>
+      <List className={classes.ContainerButton}>
+        <ListItem button className={classes.ItemButton}>
           <ListItemIcon>
-            <PublicIcon />
+            <PublicIcon className={classes.iconColor}/>
           </ListItemIcon>
-          <Link to="/public">Public</Link>
+          <Link to="/public" className={classes.linkColor}>Public</Link>
         </ListItem>
       </List>
-
+      <Divider />
       {isAuthenticated() && (
         <>
-          <Divider />
-          <List>
-            <ListItem button>
+          <List className={classes.ContainerButton}>
+            <ListItem button className={classes.ItemButton}>
               <ListItemIcon>
-                <VisibilityIcon />
+                <VisibilityIcon className={classes.iconColor}/>
               </ListItemIcon>
-              <Link to="/private">Private</Link>
+              <Link to="/private" className={classes.linkColor}>Private</Link>
             </ListItem>
           </List>
         </>
@@ -112,12 +135,12 @@ const TemporaryDrawer = (props: Props) => {
       {isAuthenticated() && userHasScopes(["read:courses"]) && (
         <>
           <Divider />
-          <List>
-            <ListItem button>
+          <List className={classes.ContainerButton}>
+            <ListItem button className={classes.ItemButton}>
               <ListItemIcon>
-                <SchoolIcon />
+                <SchoolIcon className={classes.iconColor}/>
               </ListItemIcon>
-              <Link to="/courses">Courses</Link>
+              <Link to="/courses" className={classes.linkColor}>Courses</Link>
             </ListItem>
           </List>
         </>
@@ -136,7 +159,7 @@ const TemporaryDrawer = (props: Props) => {
       >
         <MenuIcon />
       </IconButton>
-      <Drawer open={state.left} onClose={toggleDrawer('left', false)}>
+      <Drawer open={state.left} onClose={toggleDrawer('left', false)} classes={{ paper: classes.paper }}>
         {sideList('left')}
       </Drawer>
     </div>
