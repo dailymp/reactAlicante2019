@@ -1,5 +1,7 @@
 import * as React from "react";
 import Auth from "../Auth/Auth";
+import ProfileReviewCard from "./Card";
+import Field from './../models/Tipos';
 
 interface Props {
   auth: Auth;
@@ -30,13 +32,14 @@ class Profile  extends React.Component<Props, State>  {
     if (!profile) return null;
     return (
       <>
-        <h1>Profile</h1>
+        <ProfileReviewCard profile= {profile}  avatar={this.state.profile.name} title="" name="" media="" field={[new Field()]} />
+        {/* <h1>Profile</h1>
         <p>{profile.nickname}</p>
         <img
           style={{ maxWidth: 50, maxHeight: 50 }}
           src={profile.picture}
           alt="profile pic"
-        />
+        /> */}
         <pre>{JSON.stringify(profile, null, 2)}</pre>
       </>
     );

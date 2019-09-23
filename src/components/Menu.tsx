@@ -27,6 +27,9 @@ const useStyles = makeStyles(theme => ({
   fullList: {
     width: 'auto',
   },
+  divider: {
+    background: "#ffffff"
+  },
   menuButton: {
     marginRight: theme.spacing(2),
   },
@@ -89,7 +92,6 @@ const TemporaryDrawer = (props: Props) => {
       id="paco"
     >
 
-      <Divider />
       <List className={classes.ContainerButton}>
         <ListItem button className={classes.ItemButton}>
           <ListItemIcon>
@@ -99,7 +101,7 @@ const TemporaryDrawer = (props: Props) => {
         </ListItem>
       </List>
 
-      <Divider />
+      <Divider className={classes.divider} />
       <List className={classes.ContainerButton}>
         <ListItem button className={classes.ItemButton}>
           <ListItemIcon>
@@ -109,22 +111,22 @@ const TemporaryDrawer = (props: Props) => {
         </ListItem>
       </List>
 
-      <Divider />
+      <Divider className={classes.divider} />
       <List className={classes.ContainerButton}>
         <ListItem button className={classes.ItemButton}>
           <ListItemIcon>
-            <PublicIcon className={classes.iconColor}/>
+            <PublicIcon className={classes.iconColor} />
           </ListItemIcon>
           <Link to="/public" className={classes.linkColor}>Public</Link>
         </ListItem>
       </List>
-      <Divider />
+      <Divider className={classes.divider} />
       {isAuthenticated() && (
         <>
           <List className={classes.ContainerButton}>
             <ListItem button className={classes.ItemButton}>
               <ListItemIcon>
-                <VisibilityIcon className={classes.iconColor}/>
+                <VisibilityIcon className={classes.iconColor} />
               </ListItemIcon>
               <Link to="/private" className={classes.linkColor}>Private</Link>
             </ListItem>
@@ -134,11 +136,11 @@ const TemporaryDrawer = (props: Props) => {
 
       {isAuthenticated() && userHasScopes(["read:courses"]) && (
         <>
-          <Divider />
+          <Divider className={classes.divider} />
           <List className={classes.ContainerButton}>
             <ListItem button className={classes.ItemButton}>
               <ListItemIcon>
-                <SchoolIcon className={classes.iconColor}/>
+                <SchoolIcon className={classes.iconColor} />
               </ListItemIcon>
               <Link to="/courses" className={classes.linkColor}>Courses</Link>
             </ListItem>
