@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import * as React from "react";
-import Auth from "./Auth/Auth";
+import Auth from "../Auth/Auth";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -34,7 +34,7 @@ export const Nav = (props: Props) => {
           <Toolbar>
             <TemporaryDrawer auth={props.auth} />
             <Typography variant="h6" className={classes.title}>
-              MY GYM APP
+              REACT ALICANTE 2019 INTERNATIONAL EVENT
             </Typography>
             <Button
               onClick={isAuthenticated() ? logout : login}

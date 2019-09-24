@@ -1,8 +1,8 @@
 import * as React from 'react';
-import Auth from './Auth/Auth';
+import Auth from './../Auth/Auth';
 import Card from '@material-ui/core/Card';
 import { CardContent, Typography, CardActions, Button, CardMedia } from '@material-ui/core';
-import './css/Profile.css';
+import './../css/Profile.css';
 
 interface Props {
 	auth: Auth;

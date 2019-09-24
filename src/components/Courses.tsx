@@ -1,14 +1,14 @@
 import * as React from "react";
-import Auth from "./Auth/Auth";
+import Auth from "../Auth/Auth";
 import { Location } from "history";
-import { CoursesModel } from "./models/Courses";
+import { CoursesModel } from "./../models/Courses";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import './css/Courses.css';
+import './../css/Courses.css';
 
 interface Props {
   history: History;
@@ -61,7 +61,7 @@ class Courses extends React.Component<Props, State> {
             <GridListTile key="Subheader" cols={1} style={{ height: 'auto' }}>
               <ListSubheader component="div">
                 <Typography variant="h5">
-                  Cursos
+                  Conferences
                 </Typography>
               </ListSubheader>
             </GridListTile>

@@ -4,13 +4,13 @@ import { History } from "history";
 import Home from "./Home";
 import Profile from "./Profile";
 import Nav from "./Nav";
-import Auth from "./Auth/Auth";
+import Auth from "../Auth/Auth";
 import Callback from "./Callback";
 import Public from "./Public";
 import Private from "./Private";
 import Courses from "./Courses";
 import PrivateRoute from "./PrivateRoute";
-import AuthContext from "./AuthContext";
+import AuthContext from "../AuthContext";
 
 interface Props {
   history: History;

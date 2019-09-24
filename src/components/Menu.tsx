@@ -14,9 +14,9 @@ import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import PublicIcon from '@material-ui/icons/Public';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import { Link } from 'react-router-dom';
-import Auth from './Auth/Auth';
+import Auth from './../Auth/Auth';
 import Typography from "@material-ui/core/Typography";
-import './css/Menu.css';
+import './../css/Menu.css';
 import { Fragment } from 'react';
 
 interface Props {
@@ -154,7 +154,7 @@ const TemporaryDrawer = (props: Props) => {
               </ListItemIcon>
               <Link to="/courses" className={classes.linkColor}>
                 <Typography variant="h6">
-                  Courses
+                  Conferences
                 </Typography>
               </Link>
             </ListItem>

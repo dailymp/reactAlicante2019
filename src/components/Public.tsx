@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { List, ListItem, ListItemText } from '@material-ui/core';
-import './css/Public.css';
+import './../css/Public.css';
 
 interface State {
 	message: string;

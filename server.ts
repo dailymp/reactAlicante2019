@@ -39,8 +39,8 @@ app.get('/private', checkJwt, function(req, res) {
 app.get('/course', checkJwt, checkScope([ 'read:courses' ]), function(req, res) {
 	res.json({
 		courses: [
-			{ id: 1, title: 'How to sculpt your body in record time.' },
-			{ id: 2, title: 'Training your abs and not die in tried.' }
+			{ id: 1, title: 'React and Auth0 working together to get more secure apps.' },
+			{ id: 2, title: 'Tracking promises or how to avoid showing infinite loading indicators.' }
 		]
 	});
 });

@@ -1,7 +1,7 @@
 import * as React from "react";
-import Auth from "./Auth/Auth";
 import { List, ListItem, ListItemText } from "@material-ui/core";
-import './css/Private.css';
+import './../css/Private.css';
+import Auth from "../Auth/Auth";
 
 interface Props {
   auth: Auth;
