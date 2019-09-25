@@ -9,6 +9,9 @@ import GridListTileBar from "@material-ui/core/GridListTileBar";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import './../css/Courses.css';
+import ReactNotification from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
+import { store } from 'react-notifications-component';
 
 interface Props {
   history: History;
@@ -50,11 +53,24 @@ class Courses extends React.Component<Props, State> {
         if (response.ok) return response.json();
         throw new Error("Network response was not ok.");
       })
-      .then(response => this.setState({ adminRole: response.data }))
+      .then(response => this.setState({ adminRole: response.message.toString() }))
       .catch(error => this.setState({ message: error.message }));
   }
 
   render() {
+    this.state.adminRole && store.addNotification({
+      title: "Private api resource!",
+      message: this.state.adminRole,
+      type: "success",
+      insert: "center",
+      container: "top-center",
+      animationIn: ["animated", "fadeIn"],
+      animationOut: ["animated", "fadeOut"],
+      dismiss: {
+        duration: 8000,
+        onScreen: true
+      }
+    });
     return (
       <Container className="ContainerCourses">
         < GridList cols={1} className="GridListCourses">
@@ -75,10 +91,8 @@ class Courses extends React.Component<Props, State> {
               </GridListTile>
             ))}
         </GridList >
-        {this.state.adminRole && (<Typography>
-        {console.log(this.state, 'state')}
-         Role(s) message: {this.state.adminRole}
-        </Typography>)}
+        <ReactNotification
+        />
       </Container >
     );
   }

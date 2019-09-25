@@ -23,13 +23,13 @@ class Public extends React.Component<{}, State> {
 			.catch((error) => this.setState({ message: error.message }));
 	}
 
-	render() {
-		store.addNotification({
+	render() {	
+		this.state.message && store.addNotification({
 			title: "Public Page!",
-			message: `${this.state.message}`,
+			message: this.state.message,
 			type: "success",
-			insert: "top",
-			container: "top-right",
+			insert: "center",
+			container: "top-center",
 			animationIn: ["animated", "fadeIn"],
 			animationOut: ["animated", "fadeOut"],
 			dismiss: {
