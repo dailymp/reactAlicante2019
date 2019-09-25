@@ -1,8 +1,7 @@
 import * as React from 'react';
 import Auth from './../Auth/Auth';
-import Card from '@material-ui/core/Card';
-import { CardContent, Typography, CardActions, Button, CardMedia } from '@material-ui/core';
 import './../css/Profile.css';
+import ProfileReviewCard from './Card';
 
 interface Props {
 	auth: Auth;
@@ -31,34 +30,7 @@ class Profile extends React.Component<Props, State> {
 		if (!profile) return null;
 		return (
 			<div className="ContainerCardProfile">
-				<Card className="CardProfile">
-					<CardMedia
-						component="img"
-						alt="Profile picture"
-						height="140"
-						image={profile.picture}
-						title="Profile picture"
-					/>
-					<CardContent>
-						<Typography variant="h5" component="h2" gutterBottom>
-							{profile.nickname}
-						</Typography>
-						<Typography variant="h5" color="textSecondary" component="p">
-							{profile.name}
-						</Typography>
-						<Typography color="textSecondary">{profile.email}</Typography>
-						<Typography variant="body2" component="p">
-							{profile.email_verified && 'Verified email'}
-							{!profile.email_verified && 'unverified email'}
-							<br />
-						</Typography>
-					</CardContent>
-					<CardActions>
-						<Button className="ButtonProfile" size="small">
-							Learn More
-						</Button>
-					</CardActions>
-				</Card>
+				<ProfileReviewCard profile={this.state.profile} previewProfile={true} />
 			</div>
 		);
 	}

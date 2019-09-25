@@ -43,11 +43,12 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface Props {
 	profile: any;
+	previewProfile: boolean;
 }
 const profileUnloggedPicture = 'https://pbs.twimg.com/profile_images/906151350588887040/XC5RD0t-.jpg';
 export default function ProfileReviewCard(props: Props) {
 	const classes = useStyles();
-	const [ expanded, setExpanded ] = React.useState(false);
+	const [expanded, setExpanded] = React.useState(false);
 
 	function handleExpandClick() {
 		setExpanded(!expanded);
@@ -76,44 +77,53 @@ export default function ProfileReviewCard(props: Props) {
 			/>
 			<CardContent>
 				<Typography variant="body2" color="textSecondary" component="p">
-					{console.log(props.profile)}
 					{props.profile && props.profile.name}
 				</Typography>
+				{props.previewProfile && props.profile && (
+					<>
+						<Typography color="textSecondary">{props.profile.email}</Typography>
+						<Typography variant="body2" component="p">
+							{props.profile.email_verified && 'Verified email'}
+							{!props.profile.email_verified && 'unverified email'}
+							<br />
+						</Typography>
+					</>
+				)}
 			</CardContent>
-			<CardActions disableSpacing>
-				<IconButton aria-label="add to favorites">
-					<FavoriteIcon />
-				</IconButton>
-				<IconButton aria-label="share">
-					<ShareIcon />
-				</IconButton>
-				<IconButton
-					className={clsx(classes.expand, {
-						[classes.expandOpen]: expanded
-					})}
-					onClick={handleExpandClick}
-					aria-expanded={expanded}
-					aria-label="show more"
-				>
-					<ExpandMoreIcon />
-				</IconButton>
-			</CardActions>
-			<Collapse in={expanded} timeout="auto" unmountOnExit>
-				<CardContent>
-					<Typography paragraph>Details:</Typography>
-					<Typography paragraph>
-						{props.profile ? props.profile.email : 'React Alicante is an awesome event'}
-					</Typography>
-					<Typography paragraph>
-						Role(s): {props.profile && props.profile['https://localhost:3000/roles']}
-					</Typography>
-					<Typography variant="body2" component="p">
-						{props.profile && props.profile.email_verified && 'Verified email'}
-						{props.profile && !props.profile.email_verified && 'unverified email'}
-						<br />
-					</Typography>
-				</CardContent>
-			</Collapse>
+			{props.previewProfile && (
+				<>
+					<CardActions disableSpacing>
+						<IconButton aria-label="add to favorites">
+							<FavoriteIcon />
+						</IconButton>
+						<IconButton aria-label="share">
+							<ShareIcon />
+						</IconButton>
+						<IconButton
+							className={clsx(classes.expand, {
+								[classes.expandOpen]: expanded
+							})}
+							onClick={handleExpandClick}
+							aria-expanded={expanded}
+							aria-label="show more"
+						>
+							<ExpandMoreIcon />
+						</IconButton>
+					</CardActions>
+					<Collapse in={expanded} timeout="auto" unmountOnExit>
+						<CardContent>
+							<Typography paragraph>Details:</Typography>
+							<Typography variant="h5" component="h2" gutterBottom>
+								Nickname: {props.profile ? props.profile.nickname : 'React Alicante is an awesome event'}
+							</Typography>
+							<Typography paragraph>
+								Role(s): {props.profile && props.profile['https://localhost:3000/roles']}
+							</Typography>
+							<br />
+						</CardContent>
+					</Collapse>
+				</>
+			)}
 		</Card>
 	);
 }

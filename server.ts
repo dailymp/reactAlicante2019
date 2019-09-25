@@ -20,19 +20,19 @@ const checkJwt = jwt({
 
 	// This must match the algorithm selected in the Auth0 dashboard under your app's advanced settings under the OAuth tab
 	algorithms: [ 'RS256' ]
-});
+});	
 
 const app = express();
 
 app.get('/public', function(req, res) {
 	res.json({
-		message: 'Hello from a public API!'
+		message: 'You are inside a public API resource!'
 	});
 });
 
 app.get('/private', checkJwt, function(req, res) {
 	res.json({
-		message: 'Hello! You are in private temple of body.'
+		message: 'You are inside a private API resource'
 	});
 });
 
@@ -58,7 +58,7 @@ const checkRole = (role) => {
 
 app.get('/admin', checkJwt, checkRole('admin'), function(req, res) {
 	res.json({
-		message: 'Hello from an admin API!'
+		message: 'Your are inside a protected API resource just accesible with admin role!'
 	});
 });
 

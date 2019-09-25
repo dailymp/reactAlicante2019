@@ -1,7 +1,6 @@
 import * as React from "react";
-
 import { Route } from "react-router-dom";
-import AuthContext from "./../AuthContext";
+import AuthContext from "../Auth/AuthContext";
 import Auth from "./../Auth/Auth";
 
 interface Props {
@@ -32,8 +31,7 @@ export default class PrivateRoute extends React.Component<Props, {}> {
               );
             }
             // 3. Render component
-            return <>
-              {/* <pre>{JSON.stringify(auth)}</pre> */}
+            return <>     
               <Component auth={auth} {...props} />
             </>
 

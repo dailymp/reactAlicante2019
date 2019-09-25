@@ -10,7 +10,7 @@ import Public from "./Public";
 import Private from "./Private";
 import Courses from "./Courses";
 import PrivateRoute from "./PrivateRoute";
-import AuthContext from "../AuthContext";
+import AuthContext from "../Auth/AuthContext";
 
 interface Props {
   history: History;

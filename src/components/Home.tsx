@@ -10,8 +10,8 @@ interface Props {
 }
 
 interface State {
-  profile:any;
-  error:string;
+  profile: any;
+  error: string;
 }
 
 class Home extends React.Component<Props> {
@@ -32,9 +32,9 @@ class Home extends React.Component<Props> {
   render() {
     const { isAuthenticated, login } = this.props.auth;
     return (
-   
-        <Container maxWidth="sm" className="ContainerCardHome">
-        <ProfileReviewCard profile= {this.state.profile}/>
+
+      <Container maxWidth="sm" className="ContainerCardHome">
+        <ProfileReviewCard profile={this.state.profile} previewProfile={false} />
         {isAuthenticated() ? (
           <List >
             <ListItem button className="ContainerButtonHome">

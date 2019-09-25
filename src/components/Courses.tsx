@@ -18,6 +18,7 @@ interface Props {
 interface State {
   courses: CoursesModel[];
   message: string;
+  adminRole: string;
 }
 
 class Courses extends React.Component<Props, State> {
@@ -26,9 +27,9 @@ class Courses extends React.Component<Props, State> {
     super(props);
     this.state = {
       courses: [],
-      message: ""
+      message: "",
+      adminRole: '',
     }
-
   }
 
   componentDidMount() {
@@ -49,33 +50,36 @@ class Courses extends React.Component<Props, State> {
         if (response.ok) return response.json();
         throw new Error("Network response was not ok.");
       })
-      .then(response => console.log(response))
+      .then(response => this.setState({ adminRole: response.data }))
       .catch(error => this.setState({ message: error.message }));
   }
 
   render() {
-
     return (
-        <Container className="ContainerCourses">
-          < GridList cols={1} className="GridListCourses">
-            <GridListTile key="Subheader" cols={1} style={{ height: 'auto' }}>
-              <ListSubheader component="div">
-                <Typography variant="h5">
-                  Conferences
+      <Container className="ContainerCourses">
+        < GridList cols={1} className="GridListCourses">
+          <GridListTile key="Subheader" cols={1} style={{ height: 'auto' }}>
+            <ListSubheader component="div">
+              <Typography variant="h5">
+                Conferences
                 </Typography>
-              </ListSubheader>
-            </GridListTile>
-            {
-              this.state.courses.map(course => (
-                <GridListTile key={course.id} cols={1} style={{ height: 'auto', width: 'auto' }}>
-                  <img src="/img/cursos.jpg" alt="course" max-width="200px" />
-                  <GridListTileBar
-                    title={course.title}
-                    titlePosition="bottom" />
-                </GridListTile>
-              ))}
-          </GridList >
-        </Container >
+            </ListSubheader>
+          </GridListTile>
+          {
+            this.state.courses.map(course => (
+              <GridListTile key={course.id} cols={1} style={{ height: 'auto', width: 'auto' }}>
+                <img src="/img/cursos.jpg" alt="course" max-width="200px" />
+                <GridListTileBar
+                  title={course.title}
+                  titlePosition="bottom" />
+              </GridListTile>
+            ))}
+        </GridList >
+        {this.state.adminRole && (<Typography>
+        {console.log(this.state, 'state')}
+         Role(s) message: {this.state.adminRole}
+        </Typography>)}
+      </Container >
     );
   }
 }
